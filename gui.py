@@ -15,7 +15,10 @@ def get_placeholder_function(input_text, placeholder, input_Event):
 	'input_text'. """
 
 	def input_placeholder_handler(event):
-		""" Adds or removes placeholder to the comment_input Entry. """
+		""" Adds or removes placeholder to the comment_input Entry. If the text
+		in the input box is the placeholder, and the user clicks in it, the
+		placeholder disappears. If the user leaves the input box and it's still
+		empty, the placeholder is put back. """
 		text = input_text.get()
 
 		if text == placeholder:
@@ -85,13 +88,37 @@ separator_input_placeholder_handler = get_placeholder_function(
 separator_input.bind('<FocusIn>', separator_input_placeholder_handler)
 separator_input.bind('<FocusOut>', separator_input_placeholder_handler)
 
+
+#------------------------------------------------
+#---------     Width label & input     ----------
+#------------------------------------------------
+width_label = Label(root, text="Total width: ", pady=30)
+
+width_input_text = StringVar()
+width_input = Entry(
+	root,
+	width=30,
+	fg="grey",
+	textvariable=width_input_text
+)
+width_input_placeholder = "e.g. 80 or 50"
+width_input_text.set(width_input_placeholder)
+width_input_placeholder_handler = get_placeholder_function(
+	width_input_text,
+	width_input_placeholder,
+	width_input
+)
+width_input.bind('<FocusIn>', width_input_placeholder_handler)
+width_input.bind('<FocusOut>', width_input_placeholder_handler)
+
+
 #------------------------------------------------
 #---------       Generate button       ----------
 #------------------------------------------------
 generate_button = Button(
     root,
     text="Generate separator",
-    pady=50,
+    pady=20,
 	padx=100,
     bg="#002060",
     command=generate
@@ -108,7 +135,10 @@ comment_input.grid(row=0, column=1)
 separator_label.grid(row=1, column=0)
 separator_input.grid(row=1, column=1)
 
-generate_button.grid(row=2, column=0, columnspan=2)
+width_label.grid(row=2, column=0)
+width_input.grid(row=2, column=1)
+
+generate_button.grid(row=3, column=0, columnspan=2)
 
 
 root.mainloop()
