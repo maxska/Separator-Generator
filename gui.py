@@ -113,16 +113,74 @@ width_input.bind('<FocusOut>', width_input_placeholder_handler)
 
 
 #------------------------------------------------
+#---------     Rows label & input     ----------
+#------------------------------------------------
+rows_label = Label(root, text="Separator rows: ", pady=30)
+
+rows_input_text = StringVar()
+rows_input = Entry(
+	root,
+	width=30,
+	fg="grey",
+	textvariable=rows_input_text
+)
+rows_input_placeholder = "e.g. 3"
+rows_input_text.set(rows_input_placeholder)
+rows_input_placeholder_handler = get_placeholder_function(
+	rows_input_text,
+	rows_input_placeholder,
+	rows_input
+)
+rows_input.bind('<FocusIn>', rows_input_placeholder_handler)
+rows_input.bind('<FocusOut>', rows_input_placeholder_handler)
+
+
+#------------------------------------------------
+#---------     Title label & input     ----------
+#------------------------------------------------
+title_label = Label(root, text="Comment title: ", pady=30)
+
+title_input_text = StringVar()
+title_input = Entry(
+	root,
+	width=30,
+	fg="grey",
+	textvariable=title_input_text
+)
+title_input_placeholder = "e.g. 'Function declarations'"
+title_input_text.set(title_input_placeholder)
+title_input_placeholder_handler = get_placeholder_function(
+	title_input_text,
+	title_input_placeholder,
+	title_input
+)
+title_input.bind('<FocusIn>', title_input_placeholder_handler)
+title_input.bind('<FocusOut>', title_input_placeholder_handler)
+
+
+#------------------------------------------------
 #---------       Generate button       ----------
 #------------------------------------------------
+
 generate_button = Button(
     root,
     text="Generate separator",
     pady=20,
 	padx=100,
-    bg="#002060",
+    bg="#204020",
     command=generate
 )
+
+
+#------------------------------------------------
+#---------            Output           ----------
+#------------------------------------------------
+
+output = Text(root, bg="#202020", fg="white", height=10, width=50)
+
+
+
+
 
 
 ###############################################################################
@@ -138,7 +196,15 @@ separator_input.grid(row=1, column=1)
 width_label.grid(row=2, column=0)
 width_input.grid(row=2, column=1)
 
-generate_button.grid(row=3, column=0, columnspan=2)
+rows_label.grid(row=3, column=0)
+rows_input.grid(row=3, column=1)
+
+title_label.grid(row=4, column=0)
+title_input.grid(row=4, column=1)
+
+generate_button.grid(row=5, column=0, columnspan=2)
+
+output.grid(row=6, column=0, columnspan=2)
 
 
 root.mainloop()
