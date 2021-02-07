@@ -10,7 +10,7 @@ def generate():
     pass
 
 
-def get_placeholder_function(input_text, placeholder):
+def get_placeholder_function(input_text, placeholder, input_Event):
 	""" Returns a function for handling placeholders for the StringVar named
 	'input_text'. """
 
@@ -20,10 +20,10 @@ def get_placeholder_function(input_text, placeholder):
 
 		if text == placeholder:
 			input_text.set("")
+			input_Event.configure(fg="white")
 		elif len(text) == 0:
 			input_text.set(placeholder)
-
-		return
+			input_Event.configure(fg="grey")
 
 	return input_placeholder_handler
 	
@@ -40,7 +40,7 @@ root.title("Separator Generator")
 #------------------------------------------------
 #---------    Comment label & input    ----------
 #------------------------------------------------
-comment_label = Label(root, text="Line comment syntax: ")
+comment_label = Label(root, text="Line comment syntax: ", pady=30)
 
 comment_input_text = StringVar()
 comment_input = Entry(
@@ -56,7 +56,8 @@ comment_input_text.set(comment_input_placeholder)
 # outside of comment_input:
 comment_input_placeholder_handler = get_placeholder_function(
 	comment_input_text, 
-	comment_input_placeholder
+	comment_input_placeholder,
+	comment_input
 )
 comment_input.bind('<FocusIn>', comment_input_placeholder_handler)
 comment_input.bind('<FocusOut>', comment_input_placeholder_handler)
@@ -65,7 +66,7 @@ comment_input.bind('<FocusOut>', comment_input_placeholder_handler)
 #------------------------------------------------
 #---------   Separator label & input   ----------
 #------------------------------------------------
-separator_label = Label(root, text="Separator symbol: ")
+separator_label = Label(root, text="Separator symbol: ", pady=30)
 
 separator_input_text = StringVar()
 separator_input = Entry(
@@ -78,12 +79,15 @@ separator_input_placeholder = "e.g. '-' or '+'"
 separator_input_text.set(separator_input_placeholder)
 separator_input_placeholder_handler = get_placeholder_function(
 	separator_input_text, 
-	separator_input_placeholder
+	separator_input_placeholder,
+	separator_input
 )
 separator_input.bind('<FocusIn>', separator_input_placeholder_handler)
 separator_input.bind('<FocusOut>', separator_input_placeholder_handler)
 
-
+#------------------------------------------------
+#---------       Generate button       ----------
+#------------------------------------------------
 generate_button = Button(
     root,
     text="Generate separator",
