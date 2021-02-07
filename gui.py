@@ -5,20 +5,28 @@ from tkinter import *
 #								Functions
 ###############################################################################
 
+
 def generate():
     pass
 
 
-def comment_input_placeholder(event):
-    """ Adds or removes placeholder to the comment_input Entry. """
-    text = comment_text.get()
+def get_placeholder_function(input_text, placeholder):
+	""" Returns a function for handling placeholders for the StringVar named
+	'input_text'. """
 
-    if text == placeholder:
-        comment_text.set("")
-    elif len(text) == 0:
-        comment_text.set(placeholder)
+	def input_placeholder_handler(event):
+		""" Adds or removes placeholder to the comment_input Entry. """
+		text = input_text.get()
 
-    return
+		if text == placeholder:
+			input_text.set("")
+		elif len(text) == 0:
+			input_text.set(placeholder)
+
+		return
+
+	return input_placeholder_handler
+	
 
 
 ###############################################################################
@@ -28,30 +36,59 @@ def comment_input_placeholder(event):
 root = Tk()
 root.title("Separator Generator")
 
-language_label = Label(root, text="Line comment syntax:")
 
+#------------------------------------------------
+#---------    Comment label & input    ----------
+#------------------------------------------------
+comment_label = Label(root, text="Line comment syntax: ")
 
-comment_text = StringVar()
+comment_input_text = StringVar()
 comment_input = Entry(
     root,
     width=30,
     fg="grey",
-	# the text in comment_input can now be accessed through comment_text:
-    textvariable=comment_text  
+	# the text in comment_input can now be accessed through comment_input_text:
+    textvariable=comment_input_text  
 )
-placeholder = "e.g. '//' in C++ or '#' in Python"
-comment_text.set(placeholder)
-# Binds comment_input_placeholder function to when the user clicks on or 
+comment_input_placeholder = "e.g. '//' in C++ or '#' in Python"
+comment_input_text.set(comment_input_placeholder)
+# Binds comment_input_placeholder_handler function to when the user clicks on or
 # outside of comment_input:
-comment_input.bind('<FocusIn>', comment_input_placeholder)
-comment_input.bind('<FocusOut>', comment_input_placeholder)
+comment_input_placeholder_handler = get_placeholder_function(
+	comment_input_text, 
+	comment_input_placeholder
+)
+comment_input.bind('<FocusIn>', comment_input_placeholder_handler)
+comment_input.bind('<FocusOut>', comment_input_placeholder_handler)
 
-temp_input = Entry(root)
+
+#------------------------------------------------
+#---------   Separator label & input   ----------
+#------------------------------------------------
+separator_label = Label(root, text="Separator symbol: ")
+
+separator_input_text = StringVar()
+separator_input = Entry(
+    root,
+    width=30,
+    fg="grey",
+    textvariable=separator_input_text  
+)
+separator_input_placeholder = "e.g. '-' or '+'"
+separator_input_text.set(separator_input_placeholder)
+separator_input_placeholder_handler = get_placeholder_function(
+	separator_input_text, 
+	separator_input_placeholder
+)
+separator_input.bind('<FocusIn>', separator_input_placeholder_handler)
+separator_input.bind('<FocusOut>', separator_input_placeholder_handler)
+
 
 generate_button = Button(
     root,
     text="Generate separator",
     pady=50,
+	padx=100,
     bg="#002060",
     command=generate
 )
@@ -61,10 +98,13 @@ generate_button = Button(
 #						Placing the elements in the window
 ###############################################################################
 
-language_label.pack()
-comment_input.pack()
-temp_input.pack()
-generate_button.pack()
+comment_label.grid(row=0, column=0)
+comment_input.grid(row=0, column=1)
+
+separator_label.grid(row=1, column=0)
+separator_input.grid(row=1, column=1)
+
+generate_button.grid(row=2, column=0, columnspan=2)
 
 
 root.mainloop()
