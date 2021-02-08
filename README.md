@@ -21,4 +21,4 @@ In your terminal emulator, write
 
 If python gives the message "ModuleNotFoundError: No module named 'tkinter'",
 install tkinter by (on debian linux):
-### `sudo apt-get python3-tk`
+### `sudo apt-get install python3-tk`

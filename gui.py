@@ -2,7 +2,7 @@ from tkinter import *
 
 
 ###############################################################################
-#								Functions
+#                               Functions
 ###############################################################################
 
 
@@ -33,7 +33,7 @@ def get_placeholder_function(input_text, placeholder, input_Event):
 
 
 ###############################################################################
-#							Creating GUI elements
+#                           Creating GUI elements
 ###############################################################################
 
 root = Tk()
@@ -184,7 +184,7 @@ output = Text(root, bg="#202020", fg="white", height=10, width=50)
 
 
 ###############################################################################
-#						Placing the elements in the window
+#                     Placing the elements in the window
 ###############################################################################
 
 comment_label.grid(row=0, column=0)
