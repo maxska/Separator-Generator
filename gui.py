@@ -1,4 +1,5 @@
 from tkinter import *
+import generator
 
 
 ###############################################################################
@@ -7,7 +8,15 @@ from tkinter import *
 
 
 def generate():
-    pass
+	#generator.generate(
+	#	line_comment, 
+	#	separator, 
+	#	total_width, 
+	#	rows, 
+	#	title, 
+	#	preferred_spacing
+	#)
+	pass
 
 
 def get_placeholder_function(input_text, placeholder, input_Event):
