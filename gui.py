@@ -67,6 +67,21 @@ comment_input.bind('<FocusOut>', comment_input_placeholder_handler)
 
 
 #------------------------------------------------
+#---------       Space checkbox        ----------
+#------------------------------------------------
+
+#space_checkbox_checked = IntVar()
+#space_checkbox = Checkbutton(
+#	root, 
+#	text="Space between line comment start and separator",
+#	variable=space_checkbox_checked,
+#	onvalue=1,
+#	offvalue=1,
+#)
+
+
+
+#------------------------------------------------
 #---------   Separator label & input   ----------
 #------------------------------------------------
 separator_label = Label(root, text="Separator symbol: ", pady=30)
@@ -159,6 +174,30 @@ title_input.bind('<FocusOut>', title_input_placeholder_handler)
 
 
 #------------------------------------------------
+#------  Preferred spacing label & input  -------
+#------------------------------------------------
+spacing_label = Label(root, text="Preferred spacing around title: ", pady=30)
+
+spacing_input_text = StringVar()
+spacing_input = Entry(
+	root,
+	width=30,
+	fg="grey",
+	textvariable=spacing_input_text
+)
+spacing_input_placeholder = "e.g. 10"
+spacing_input_text.set(spacing_input_placeholder)
+spacing_input_placeholder_handler = get_placeholder_function(
+	spacing_input_text,
+	spacing_input_placeholder,
+	spacing_input
+)
+spacing_input.bind('<FocusIn>', spacing_input_placeholder_handler)
+spacing_input.bind('<FocusOut>', spacing_input_placeholder_handler)
+
+
+
+#------------------------------------------------
 #---------       Generate button       ----------
 #------------------------------------------------
 
@@ -167,7 +206,7 @@ generate_button = Button(
     text="Generate separator",
     pady=20,
 	padx=100,
-    bg="#204020",
+    bg="#203040",
     command=generate
 )
 
@@ -190,21 +229,27 @@ output = Text(root, bg="#202020", fg="white", height=10, width=50)
 comment_label.grid(row=0, column=0)
 comment_input.grid(row=0, column=1)
 
-separator_label.grid(row=1, column=0)
-separator_input.grid(row=1, column=1)
+# space_checkbox.grid(row=1, column=0, columnspan=2)
 
-width_label.grid(row=2, column=0)
-width_input.grid(row=2, column=1)
+separator_label.grid(row=2, column=0)
+separator_input.grid(row=2, column=1)
 
-rows_label.grid(row=3, column=0)
-rows_input.grid(row=3, column=1)
+width_label.grid(row=3, column=0)
+width_input.grid(row=3, column=1)
 
-title_label.grid(row=4, column=0)
-title_input.grid(row=4, column=1)
+rows_label.grid(row=4, column=0)
+rows_input.grid(row=4, column=1)
 
-generate_button.grid(row=5, column=0, columnspan=2)
+title_label.grid(row=5, column=0)
+title_input.grid(row=5, column=1)
 
-output.grid(row=6, column=0, columnspan=2)
+spacing_label.grid(row=6, column=0)
+spacing_input.grid(row=6, column=1)
+
+generate_button.grid(row=7, column=0, columnspan=2)
+
+output.grid(row=8, column=0, columnspan=2)
+
 
 
 root.mainloop()
