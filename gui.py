@@ -64,6 +64,7 @@ def generate_separator():
 	)
 
 	#print(result)
+	#output.configure(font=("Courier", 8))
 	output.insert(1.0, result)
 
 
@@ -272,11 +273,14 @@ generate_button = Button(
 #---------            Output           ----------
 #------------------------------------------------
 
-output = Text(root, bg="#202020", fg="white", height=10, width=50)
-
-
-
-
+output = Text(
+	root, 
+	bg="#202020", 
+	fg="white", 
+	height=10, 
+	width=60
+)
+output.configure(font=("Courier", 8))
 
 
 ###############################################################################
