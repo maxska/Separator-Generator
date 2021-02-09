@@ -1,5 +1,6 @@
 from tkinter import *
 import generator
+import logic
 
 
 ###############################################################################
@@ -7,16 +8,54 @@ import generator
 ###############################################################################
 
 
-def generate():
+def generate_separator():
+	comment_input = logic.verify_string(input=comment_input_text.get(), 
+										name="Line comment", max_length=3)
+	if logic.is_error(comment_input):
+		# display message box
+		return
+
+	separator_input = logic.verify_string(
+		input=separator_input_text.get(), 
+		name="Separator symbol",
+		max_length=1
+	)
+	if logic.is_error(comment_input):
+		# display message box
+		return
+
+	width_input = logic.verify_int(input=width_input_text.get(), name="Width", 
+								   max_size=200)
+	if logic.is_error(width_input):
+		# display message box
+		return
+
+	rows_input = logic.verify_int(input=rows_input_text.get(), name="Rows", 
+								  max_size=20)
+	if logic.is_error(rows_input):
+		# display message box
+		return
+
+	title_input = logic.verify_string(input=title_input_text.get(), 
+									  name="Title", max_length=500)
+	if logic.is_error(title_input):
+		# display message box
+		return
+
+	spacing_input = logic.verify_int(input=spacing_input_text.get(), 
+									 name="Spacing", max_size=100)
+	if logic.is_error(spacing_input):
+		# display message box
+		return
+
 	#generator.generate(
-	#	line_comment, 
-	#	separator, 
-	#	total_width, 
-	#	rows, 
-	#	title, 
-	#	preferred_spacing
+	#	line_comment=comment_input, 
+	#	separator_symbol=separator_input, 
+	#	total_width=width_input, 
+	#	rows=rows_input, 
+	#	title=title_input, 
+	#	preferred_spacing=spacing_input
 	#)
-	pass
 
 
 def get_placeholder_function(input_text, placeholder, input_Event):
@@ -56,11 +95,11 @@ comment_label = Label(root, text="Line comment syntax: ", pady=30)
 
 comment_input_text = StringVar()
 comment_input = Entry(
-		root,
-		width=30,
-		fg="grey",
+	root,
+	width=30,
+	fg="grey",
 	# the text in comment_input can now be accessed through comment_input_text:
-		textvariable=comment_input_text  
+	textvariable=comment_input_text  
 )
 comment_input_placeholder = "e.g. '//' in C++ or '#' in Python"
 comment_input_text.set(comment_input_placeholder)
@@ -97,10 +136,10 @@ separator_label = Label(root, text="Separator symbol: ", pady=30)
 
 separator_input_text = StringVar()
 separator_input = Entry(
-		root,
-		width=30,
-		fg="grey",
-		textvariable=separator_input_text  
+	root,
+	width=30,
+	fg="grey",
+	textvariable=separator_input_text  
 )
 separator_input_placeholder = "e.g. '-' or '+'"
 separator_input_text.set(separator_input_placeholder)
@@ -211,12 +250,12 @@ spacing_input.bind('<FocusOut>', spacing_input_placeholder_handler)
 #------------------------------------------------
 
 generate_button = Button(
-		root,
-		text="Generate separator",
-		pady=20,
+	root,
+	text="Generate separator",
+	pady=20,
 	padx=100,
-		bg="#203040",
-		command=generate
+	bg="#203040",
+	command=generate_separator
 )
 
 
