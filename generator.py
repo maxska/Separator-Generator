@@ -7,46 +7,64 @@ def get_maximum_spacing(line_comment, total_width, title):
 
 
 def get_side_separator_length(maximum_spacing, preferred_spacing):
-	""" Returns the side separator length that is actually used. """
+	""" Returns the length that will be used for the side separator symbols 
+	(maximum_spacing - preferred_spacing). """
 	# print(f"maximum: {maximum_spacing}, preferred: {preferred_spacing}")
+
 	assert maximum_spacing > preferred_spacing  # fix later
 
 	return maximum_spacing - preferred_spacing
 
 
 def is_uneven(number):
+	""" Returns True if number is uneven. """
 	return number/2 != number//2
 
 
-def generate(line_comment, separator, total_width, rows, title, 
+def generate(line_comment, separator_symbol, total_width, rows, title,
 			 preferred_spacing):
 	""" Generates and returns a separator. """
 
+	# one line for the above_and_below_separators:
 	separator_line = line_comment + "".join(
-		[separator for elem in range(total_width - len(line_comment))]
+		[separator_symbol for elem in range(total_width - len(line_comment))]
 	) + "\n"
 
+	# above_and_below_separators is the line or lines of separator symbols that
+	# will be placed above and below the title of the separator:
 	above_and_below_separators = "".join(
 		[separator_line for elem in range(math.ceil(rows/2))]
 	)
 
+	# the maximum possible spacing that there's room for on both sides of the
+	# title:
 	maximum_spacing = get_maximum_spacing(line_comment, total_width, title)
 
+	# maximum_spacing - preferred_spacing is the length that will be
+	# used for the side separator symbols (and the rest will be used for just
+	# spaces):
 	side_separator_length = get_side_separator_length(
 		maximum_spacing, 
 		preferred_spacing
 	)
 
-	side_separator = separator * side_separator_length
+	# side_separator is the separator string containing multiple separator 
+	# symbols that will be placed on both sides of title:
+	side_separator = separator_symbol * side_separator_length
+	
+	# side_spacing is the spacing that will be placed between the title
+	# and the side_separator:
 	side_spacing = " " * preferred_spacing
 
 	# compensate with extra separator symbol if one of len(title) and
 	# total_width is uneven and not the other:
 	compensate_uneven_title \
-		= separator if is_uneven(len(title)) and not is_uneven(total_width) else ""
+		= separator_symbol if is_uneven(len(title)) and not \
+		is_uneven(total_width) else ""
 
 	compensate_uneven_length \
-		= separator if is_uneven(total_width) and not is_uneven(len(title)) else ""
+		= separator_symbol if is_uneven(total_width) and not \
+		is_uneven(len(title)) else ""
 
 	result = ""
 	result += above_and_below_separators
@@ -56,15 +74,7 @@ def generate(line_comment, separator, total_width, rows, title,
 	result += above_and_below_separators	
 	return result
 
+
 print(
-	generate("//", "#", 80 , 3, "abc", 5)
-)
-print(
-	generate("//", "#", 80 , 3, "abcd", 5)
-)
-print(
-	generate("//", "#", 81 , 3, "abc", 5)
-)
-print(
-	generate("//", "#", 81 , 3, "abcd", 5)
+	generate("//", "#", 80 , 3, "title", 5)
 )
