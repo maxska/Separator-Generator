@@ -56,11 +56,11 @@ comment_label = Label(root, text="Line comment syntax: ", pady=30)
 
 comment_input_text = StringVar()
 comment_input = Entry(
-    root,
-    width=30,
-    fg="grey",
+		root,
+		width=30,
+		fg="grey",
 	# the text in comment_input can now be accessed through comment_input_text:
-    textvariable=comment_input_text  
+		textvariable=comment_input_text  
 )
 comment_input_placeholder = "e.g. '//' in C++ or '#' in Python"
 comment_input_text.set(comment_input_placeholder)
@@ -97,10 +97,10 @@ separator_label = Label(root, text="Separator symbol: ", pady=30)
 
 separator_input_text = StringVar()
 separator_input = Entry(
-    root,
-    width=30,
-    fg="grey",
-    textvariable=separator_input_text  
+		root,
+		width=30,
+		fg="grey",
+		textvariable=separator_input_text  
 )
 separator_input_placeholder = "e.g. '-' or '+'"
 separator_input_text.set(separator_input_placeholder)
@@ -211,12 +211,12 @@ spacing_input.bind('<FocusOut>', spacing_input_placeholder_handler)
 #------------------------------------------------
 
 generate_button = Button(
-    root,
-    text="Generate separator",
-    pady=20,
+		root,
+		text="Generate separator",
+		pady=20,
 	padx=100,
-    bg="#203040",
-    command=generate
+		bg="#203040",
+		command=generate
 )
 
 

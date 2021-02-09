@@ -7,7 +7,7 @@ def get_maximum_spacing(line_comment, total_width, title):
 
 
 def get_side_separator_length(maximum_spacing, preferred_spacing):
-	""" Returns the spacing that is actually used. """
+	""" Returns the side separator length that is actually used. """
 	# print(f"maximum: {maximum_spacing}, preferred: {preferred_spacing}")
 	assert maximum_spacing > preferred_spacing  # fix later
 
@@ -35,16 +35,25 @@ def generate(line_comment, separator, total_width, rows, title,
 
 	side_separator = separator * side_separator_length
 	side_spacing = " " * preferred_spacing
-
+	compensate_uneven_side = separator if len(title)/2 != len(title)//2 else ""
 
 	result = ""
 	result += above_and_below_separators
 	result += f"{line_comment}{side_separator}{side_spacing}"
-	result += f"{title}{side_spacing}{side_separator}\n"
+	result += f"{title}{side_spacing}{side_separator}"
+	result += f"{compensate_uneven_side}\n"
 	result += above_and_below_separators	
 	return result
 
 
 print(
-	generate("//", "#", 80, 3, "The title", 5)
+	generate("//", "#", 80, 3, "The title.", 5)
+)
+
+print(
+	generate("//", "#", 80, 3, "The title..", 5)
+)
+
+print(
+	generate("//", "#", 80, 3, "The title...", 5)
 )
