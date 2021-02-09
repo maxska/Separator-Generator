@@ -33,7 +33,7 @@ def generate(line_comment, separator_symbol, total_width, rows, title,
 	# above_and_below_separators is the line or lines of separator symbols that
 	# will be placed above and below the title of the separator:
 	above_and_below_separators = "".join(
-		[separator_line for elem in range(math.ceil(rows/2))]
+		[separator_line for elem in range(math.floor(rows/2))]
 	)
 
 	# the maximum possible spacing that there's room for on both sides of the
@@ -75,6 +75,6 @@ def generate(line_comment, separator_symbol, total_width, rows, title,
 	return result
 
 
-print(
-	generate("//", "#", 80 , 3, "title", 5)
-)
+#print(
+#	generate("//", "#", 80 , 3, "title", 5)
+#)

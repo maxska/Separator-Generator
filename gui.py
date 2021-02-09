@@ -13,6 +13,7 @@ def generate_separator():
 										name="Line comment", max_length=3)
 	if logic.is_error(comment_input):
 		# display message box
+		print("error 1")
 		return
 
 	separator_input = logic.verify_string(
@@ -22,40 +23,48 @@ def generate_separator():
 	)
 	if logic.is_error(comment_input):
 		# display message box
+		print("error 2")
 		return
 
 	width_input = logic.verify_int(input=width_input_text.get(), name="Width", 
 								   max_size=200)
 	if logic.is_error(width_input):
 		# display message box
+		print("error 3")
 		return
 
 	rows_input = logic.verify_int(input=rows_input_text.get(), name="Rows", 
 								  max_size=20)
 	if logic.is_error(rows_input):
 		# display message box
+		print("error 4")
 		return
 
 	title_input = logic.verify_string(input=title_input_text.get(), 
 									  name="Title", max_length=500)
 	if logic.is_error(title_input):
 		# display message box
+		print("error 5")
 		return
 
 	spacing_input = logic.verify_int(input=spacing_input_text.get(), 
 									 name="Spacing", max_size=100)
 	if logic.is_error(spacing_input):
 		# display message box
+		print("error 6")
 		return
 
-	#generator.generate(
-	#	line_comment=comment_input, 
-	#	separator_symbol=separator_input, 
-	#	total_width=width_input, 
-	#	rows=rows_input, 
-	#	title=title_input, 
-	#	preferred_spacing=spacing_input
-	#)
+	result = generator.generate(
+		line_comment=comment_input, 
+		separator_symbol=separator_input, 
+		total_width=width_input, 
+		rows=rows_input, 
+		title=title_input, 
+		preferred_spacing=spacing_input
+	)
+
+	#print(result)
+	output.insert(1.0, result)
 
 
 def get_placeholder_function(input_text, placeholder, input_Event):
@@ -301,3 +310,6 @@ output.grid(row=8, column=0, columnspan=2)
 
 
 root.mainloop()
+
+
+
