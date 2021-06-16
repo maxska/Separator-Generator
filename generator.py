@@ -61,24 +61,11 @@ def generate(
     # and the side_separator:
     side_spacing = " " * preferred_spacing
 
-    # compensate with extra separator symbol if one of len(title) and
-    # total_width is uneven and not the other:
-    compensate_uneven_title = (
-        separator_symbol
-        if is_uneven(len(title)) and not is_uneven(total_width)
-        else ""
-    )
+    title_row = f"{line_comment}{side_separator}{side_spacing}"
+    title_row += f"{title}{side_spacing}"
+    title_row += separator_symbol * (total_width - len(title_row))
 
-    compensate_uneven_length = (
-        separator_symbol
-        if is_uneven(total_width) and not is_uneven(len(title))
-        else ""
-    )
-
-    result = ""
-    result += above_and_below_separators
-    result += f"{line_comment}{side_separator}{side_spacing}"
-    result += f"{title}{side_spacing}{side_separator}"
-    result += f"{compensate_uneven_title}{compensate_uneven_length}\n"
+    result = above_and_below_separators
+    result += f"{title_row}\n"
     result += above_and_below_separators
     return result
