@@ -15,14 +15,16 @@ def verify_int(input, name, max_size):
         if number <= max_size:
             return number
         else:
+            line_break = '\n' if len(name) > 20 else ''
             return (
                 "Error",
-                f"'{name}' needs to be smaller than {max_size}."
+                f"'{name}'{line_break}needs to be smaller than {max_size}."
             )
     except ValueError:
+        line_break = '\n' if len(name) > 20 else ''
         return (
             "Error",
-            f"'{name}' needs to be an integer value."
+            f"'{name}'{line_break}needs to be an integer value."
         )
 
 

@@ -11,7 +11,7 @@ def display_error(message):
     output.configure(fg="red")
     output.configure(font=("Courier", 10))
     output.configure(width=50)
-    output.configure(height=2)
+    output.configure(height=4)
     # delete current output if any:
     output.delete(1.0, END)
 
@@ -41,7 +41,7 @@ def generate_separator():
 
     width_input = verify_int(
         input=width_input_text.get(),
-        name="Width",
+        name="Total width",
         max_size=200
     )
     if is_error(width_input):
@@ -50,7 +50,7 @@ def generate_separator():
 
     rows_input = verify_int(
         input=rows_input_text.get(),
-        name="Total height",
+        name="Preferred total height",
         max_size=20
     )
     if is_error(rows_input):
@@ -60,7 +60,7 @@ def generate_separator():
 
     title_input = verify_string(
         input=title_input_text.get(),
-        name="Title",
+        name="Text",
         max_length=500
     )
     if is_error(title_input):
@@ -70,7 +70,7 @@ def generate_separator():
 
     spacing_input = verify_int(
         input=spacing_input_text.get(),
-        name="Spacing",
+        name="Preferred spacing around title",
         max_size=100
     )
     if is_error(spacing_input):
@@ -128,7 +128,7 @@ root.title("Separator Generator")
 # ------------------------------------------------
 # ---------    Comment label & input    ----------
 # ------------------------------------------------
-comment_label = Label(root, text="Line comment syntax: ", pady=30)
+comment_label = Label(root, text="Line comment\nsyntax: ", pady=20)
 
 comment_input_text = StringVar()
 comment_input = Entry(
@@ -168,7 +168,7 @@ comment_input.bind('<FocusOut>', comment_input_placeholder_handler)
 # ------------------------------------------------
 # ---------   Separator label & input   ----------
 # ------------------------------------------------
-separator_label = Label(root, text="Separator symbol: ", pady=30)
+separator_label = Label(root, text="Separator symbol: ", pady=20)
 
 separator_input_text = StringVar()
 separator_input = Entry(
@@ -191,7 +191,7 @@ separator_input.bind('<FocusOut>', separator_input_placeholder_handler)
 # ------------------------------------------------
 # ---------     Width label & input     ----------
 # ------------------------------------------------
-width_label = Label(root, text="Total width: ", pady=30)
+width_label = Label(root, text="Total width: ", pady=20)
 
 width_input_text = StringVar()
 width_input = Entry(
@@ -214,7 +214,7 @@ width_input.bind('<FocusOut>', width_input_placeholder_handler)
 # ------------------------------------------------
 # ---------     Rows label & input     ----------
 # ------------------------------------------------
-rows_label = Label(root, text="Total height: ", pady=30)
+rows_label = Label(root, text="Preferred total height: ", pady=20)
 
 rows_input_text = StringVar()
 rows_input = Entry(
@@ -237,7 +237,7 @@ rows_input.bind('<FocusOut>', rows_input_placeholder_handler)
 # ------------------------------------------------
 # ---------     Title label & input     ----------
 # ------------------------------------------------
-title_label = Label(root, text="Comment title: ", pady=30)
+title_label = Label(root, text="Text: ", pady=20, justify="right")
 
 title_input_text = StringVar()
 title_input = Entry(
@@ -260,7 +260,7 @@ title_input.bind('<FocusOut>', title_input_placeholder_handler)
 # ------------------------------------------------
 # ------  Preferred spacing label & input  -------
 # ------------------------------------------------
-spacing_label = Label(root, text="Preferred spacing around title: ", pady=30)
+spacing_label = Label(root, text="Preferred spacing\naround title: ", pady=20)
 
 spacing_input_text = StringVar()
 spacing_input = Entry(
