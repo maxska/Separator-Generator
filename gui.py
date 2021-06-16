@@ -78,8 +78,10 @@ def generate_separator():
         preferred_spacing=spacing_input
     )
 
-    # print(result)
-    # output.configure(font=("Courier", 8))
+    output.configure(width=width_input)
+    # delete current output if any:
+    output.delete(1.0, END)
+    # insert result:
     output.insert(1.0, result)
 
 
@@ -289,9 +291,9 @@ output = Text(
     bg="#202020",
     fg="white",
     height=10,
-    width=60
+    width=80
 )
-output.configure(font=("Courier", 8))
+output.configure(font=("Courier", 6))
 
 
 ###############################################################################
