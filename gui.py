@@ -7,16 +7,27 @@ from utils import verify_string, verify_int, is_error
 #                               Functions
 ###############################################################################
 
+def display_error(message):
+    output.configure(fg="red")
+    output.configure(font=("Courier", 10))
+    output.configure(width=50)
+    output.configure(height=2)
+    # delete current output if any:
+    output.delete(1.0, END)
+
+    text = f"Error:\n{message}"
+    # insert error message:
+    output.insert(1.0, text)
+
 
 def generate_separator():
     comment_input = verify_string(
         input=comment_input_text.get(),
-        name="Line comment",
-        max_length=3
+        name="Line comment syntax",
+        max_length=5
     )
     if is_error(comment_input):
-        # display message box
-        print("error 1")
+        display_error(comment_input[1])
         return
 
     separator_input = verify_string(
@@ -24,9 +35,8 @@ def generate_separator():
         name="Separator symbol",
         max_length=1
     )
-    if is_error(comment_input):
-        # display message box
-        print("error 2")
+    if is_error(separator_input):
+        display_error(separator_input[1])
         return
 
     width_input = verify_int(
@@ -35,18 +45,17 @@ def generate_separator():
         max_size=200
     )
     if is_error(width_input):
-        # display message box
-        print("error 3")
+        display_error(width_input[1])
         return
 
     rows_input = verify_int(
         input=rows_input_text.get(),
-        name="Rows",
+        name="Total height",
         max_size=20
     )
     if is_error(rows_input):
         # display message box
-        print("error 4")
+        display_error(rows_input[1])
         return
 
     title_input = verify_string(
@@ -56,7 +65,7 @@ def generate_separator():
     )
     if is_error(title_input):
         # display message box
-        print("error 5")
+        display_error(title_input[1])
         return
 
     spacing_input = verify_int(
@@ -66,7 +75,7 @@ def generate_separator():
     )
     if is_error(spacing_input):
         # display message box
-        print("error 6")
+        display_error(spacing_input[1])
         return
 
     result = generator.generate(
@@ -78,7 +87,10 @@ def generate_separator():
         preferred_spacing=spacing_input
     )
 
+    output.configure(fg="white")
+    output.configure(font=("Courier", 6))
     output.configure(width=width_input)
+    output.configure(height=rows_input+3)
     # delete current output if any:
     output.delete(1.0, END)
     # insert result:
@@ -202,7 +214,7 @@ width_input.bind('<FocusOut>', width_input_placeholder_handler)
 # ------------------------------------------------
 # ---------     Rows label & input     ----------
 # ------------------------------------------------
-rows_label = Label(root, text="Separator rows: ", pady=30)
+rows_label = Label(root, text="Total height: ", pady=30)
 
 rows_input_text = StringVar()
 rows_input = Entry(
@@ -277,7 +289,7 @@ generate_button = Button(
     text="Generate separator",
     pady=20,
     padx=100,
-    bg="#203040",
+    bg="#202020",
     command=generate_separator
 )
 
@@ -288,9 +300,9 @@ generate_button = Button(
 
 output = Text(
     root,
-    bg="#202020",
+    bg="black",
     fg="white",
-    height=10,
+    height=5,
     width=80
 )
 output.configure(font=("Courier", 6))
