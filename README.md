@@ -1,10 +1,10 @@
-# Separator-Generator
+# separator-generator
 An app for generating separators for your code. Sometimes it's useful to divide
 a file containing many lines of code into different sections, where each 
 section might have a "header". This is simply for readability and being able to 
 get a better overview of the file. 
 
-Example of a separator that could be used in
+Example of a separator/header that could be used above functions in
 a JavaScipt file:
 
 <pre>

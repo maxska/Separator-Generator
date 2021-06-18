@@ -7,6 +7,7 @@ from utils import verify_string, verify_int, is_error
 #                               Functions
 ###############################################################################
 
+
 def display_error(message):
     output.configure(fg="red")
     output.configure(font=("Courier", 10))
@@ -121,20 +122,30 @@ def get_placeholder_function(input_text, placeholder, input_Event):
 ###############################################################################
 #                           Creating GUI elements
 ###############################################################################
-root = Tk()
-root.title("Separator Generator")
+BACKGROUND = "#30353A"
+
+window = Tk()
+window.title("Separator Generator")
+window.configure(bg=BACKGROUND)
 
 
 # ------------------------------------------------
 # ---------    Comment label & input    ----------
 # ------------------------------------------------
-comment_label = Label(root, text="Line comment\nsyntax: ", pady=20)
+comment_label = Label(
+    window, 
+    text="Line comment\nsyntax: ", 
+    pady=20, 
+    fg="white", 
+    bg=BACKGROUND
+)
 
 comment_input_text = StringVar()
 comment_input = Entry(
-    root,
+    window,
     width=30,
     fg="grey",
+    bg=BACKGROUND,
     # the text in comment_input can now be accessed through comment_input_text:
     textvariable=comment_input_text
 )
@@ -157,7 +168,7 @@ comment_input.bind('<FocusOut>', comment_input_placeholder_handler)
 
 #space_checkbox_checked = IntVar()
 # space_checkbox = Checkbutton(
-#	root,
+#	window,
 #	text="Space between line comment start and separator",
 #	variable=space_checkbox_checked,
 #	onvalue=1,
@@ -168,13 +179,20 @@ comment_input.bind('<FocusOut>', comment_input_placeholder_handler)
 # ------------------------------------------------
 # ---------   Separator label & input   ----------
 # ------------------------------------------------
-separator_label = Label(root, text="Separator symbol: ", pady=20)
+separator_label = Label(
+    window, 
+    text="Separator symbol: ", 
+    pady=20, 
+    fg="white", 
+    bg=BACKGROUND
+)
 
 separator_input_text = StringVar()
 separator_input = Entry(
-    root,
+    window,
     width=30,
     fg="grey",
+    bg=BACKGROUND,
     textvariable=separator_input_text
 )
 separator_input_placeholder = "e.g. '-' or '+'"
@@ -191,13 +209,20 @@ separator_input.bind('<FocusOut>', separator_input_placeholder_handler)
 # ------------------------------------------------
 # ---------     Width label & input     ----------
 # ------------------------------------------------
-width_label = Label(root, text="Total width: ", pady=20)
+width_label = Label(
+    window, 
+    text="Total width: ", 
+    pady=20, 
+    fg="white", 
+    bg=BACKGROUND
+)
 
 width_input_text = StringVar()
 width_input = Entry(
-    root,
+    window,
     width=30,
     fg="grey",
+    bg=BACKGROUND,
     textvariable=width_input_text
 )
 width_input_placeholder = "e.g. 80 or 50"
@@ -214,13 +239,20 @@ width_input.bind('<FocusOut>', width_input_placeholder_handler)
 # ------------------------------------------------
 # ---------     Rows label & input     ----------
 # ------------------------------------------------
-rows_label = Label(root, text="Preferred total height: ", pady=20)
+rows_label = Label(
+    window, 
+    text="Preferred total height: ", 
+    pady=20, 
+    fg="white", 
+    bg=BACKGROUND
+)
 
 rows_input_text = StringVar()
 rows_input = Entry(
-    root,
+    window,
     width=30,
     fg="grey",
+    bg=BACKGROUND,
     textvariable=rows_input_text
 )
 rows_input_placeholder = "e.g. 3"
@@ -237,13 +269,20 @@ rows_input.bind('<FocusOut>', rows_input_placeholder_handler)
 # ------------------------------------------------
 # ---------     Title label & input     ----------
 # ------------------------------------------------
-title_label = Label(root, text="Text: ", pady=20, justify="right")
+title_label = Label(
+    window, 
+    text="Text: ", 
+    pady=20, 
+    fg="white", 
+    bg=BACKGROUND
+)
 
 title_input_text = StringVar()
 title_input = Entry(
-    root,
+    window,
     width=30,
     fg="grey",
+    bg=BACKGROUND,
     textvariable=title_input_text
 )
 title_input_placeholder = "e.g. 'Function declarations'"
@@ -260,13 +299,20 @@ title_input.bind('<FocusOut>', title_input_placeholder_handler)
 # ------------------------------------------------
 # ------  Preferred spacing label & input  -------
 # ------------------------------------------------
-spacing_label = Label(root, text="Preferred spacing\naround title: ", pady=20)
+spacing_label = Label(
+    window, 
+    text="Preferred spacing\naround title: ", 
+    pady=20,
+    fg="white",
+    bg=BACKGROUND
+)
 
 spacing_input_text = StringVar()
 spacing_input = Entry(
-    root,
+    window,
     width=30,
     fg="grey",
+    bg=BACKGROUND,
     textvariable=spacing_input_text
 )
 spacing_input_placeholder = "e.g. 10"
@@ -285,11 +331,12 @@ spacing_input.bind('<FocusOut>', spacing_input_placeholder_handler)
 # ------------------------------------------------
 
 generate_button = Button(
-    root,
+    window,
     text="Generate separator",
-    pady=20,
-    padx=100,
-    bg="#202020",
+    pady=10,
+    padx=50,
+    fg="white",
+    bg="#292d31",
     command=generate_separator
 )
 
@@ -299,7 +346,7 @@ generate_button = Button(
 # ------------------------------------------------
 
 output = Text(
-    root,
+    window,
     bg="black",
     fg="white",
     height=5,
@@ -336,4 +383,4 @@ generate_button.grid(row=7, column=0, columnspan=2)
 
 output.grid(row=8, column=0, columnspan=2)
 
-root.mainloop()
+window.mainloop()
